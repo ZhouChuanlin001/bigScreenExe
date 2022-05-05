@@ -1,0 +1,26 @@
+.bgcorner {
+  // background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;;
+  background: linear-gradient(to top, #2383ed, #2383ed) left top no-repeat,
+    // 上左
+  linear-gradient(to right, #2383ed, #2383ed) left top no-repeat,
+    //坐上
+  linear-gradient(to left, #2383ed, #2383ed) right top no-repeat,
+    //上右
+  linear-gradient(to bottom, #2383ed, #2383ed) right top no-repeat,
+    //上右
+  linear-gradient(to left, #2383ed, #2383ed) left bottom no-repeat,
+    // 下左
+  linear-gradient(to bottom, #2383ed, #2383ed) left bottom no-repeat,
+    // 左下
+  linear-gradient(to top, #2383ed, #2383ed) right bottom no-repeat,
+    // 下右
+  linear-gradient(to left, #2383ed, #2383ed) right bottom no-repeat; //右下
+
+  background-size: 3px 16px, 16px 3px, 3px 16px, 16px 3px;
+}
+
+.box{
+  background-color: rgba(7, 16, 24, 0.4);
+  border: solid 1px #2564ae;
+  .bgcorner()
+}
