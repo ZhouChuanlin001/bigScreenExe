@@ -12,32 +12,58 @@
           {{nowData}}
         </div>
       </div>
+      <div class="content-list box">
+        <listBox></listBox>
+      </div>
+      <div class="chartModelBox">
+        <payDistribution></payDistribution>
+        <payDetailed></payDetailed>
+        <payRetreat></payRetreat>
+        <payTrend></payTrend>
+        <levyTrend></levyTrend>
+        <retreatTrend></retreatTrend>
+      </div>
     </div>
   </screenAdap>
 </template>
 
 <script>
 import screenAdap from '@/components/screenAdap'
+import listBox from '@/components/listBox'
+import payDistribution from '@/components/payDistribution'
+import payDetailed from '@/components/payDetailed'
+import payRetreat from '@/components/payRetreat'
+import payTrend from '@/components/payTrend'
+import levyTrend from '@/components/levyTrend'
+import retreatTrend from '@/components/retreatTrend'
 
 export default {
   name: 'socialSecuPay',
-  components: {screenAdap},
+  components: {screenAdap, listBox, payDistribution, payDetailed, payRetreat, payTrend, levyTrend, retreatTrend},
   data () {
     return {
-      nowData: this.getDate()
+      nowData: '',
+      titleList: []
     }
   },
   mounted () {
-    setTimeout(this.getDate, 1000)
+    setInterval(this.getDate, 1000)
   },
   methods: {
     /**
      * @description 获取当前时间的方法
      */
     getDate () {
-      return this.dateTimeToString(new Date())
+      this.nowData = this.dateTimeToString(new Date())
     }
 
+  },
+  watch: {
+    nowData: {
+      handler: function (now, old) {
+        // console.log(now)
+      }
+    }
   }
 }
 </script>
@@ -87,5 +113,17 @@ export default {
         color: #1b67de;
       }
     }
+  }
+  .content-list{
+    width: 1840px;
+    height: 100px;
+    margin: 38px auto 0px auto;
+  }
+  .chartModelBox{
+    padding: 0 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
   }
 </style>
