@@ -4,6 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import util from './utils/dateFunction'
+import './assets/css/public.less'
+import './assets/js/globalCom.js'
+import * as echarts from 'echarts'
+
+Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
 Vue.use(util)
