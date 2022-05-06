@@ -167,6 +167,7 @@ export default {
           }
         )
       })
+
       let option = {
         tooltip: {
           trigger: 'axis',

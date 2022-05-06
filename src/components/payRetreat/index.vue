@@ -21,7 +21,59 @@ export default {
     }
   },
   mounted () {
-    this.initCharts()
+    let data = [
+      {
+        name: '补缴',
+        value: [
+          {
+            name: '机关养老',
+            value: 420
+          },
+          {
+            name: '失业保险',
+            value: 300
+          },
+          {
+            name: '城职养老',
+            value: 200
+          },
+          {
+            name: '城居养老',
+            value: 350
+          },
+          {
+            name: '工伤保险',
+            value: 500
+          }
+        ]
+      },
+      {
+        name: '退缴',
+        value: [
+          {
+            name: '机关养老',
+            value: 500
+          },
+          {
+            name: '失业保险',
+            value: 140
+          },
+          {
+            name: '城职养老',
+            value: 280
+          },
+          {
+            name: '城居养老',
+            value: 260
+          },
+          {
+            name: '工伤保险',
+            value: 420
+          }
+        ]
+      }
+    ]
+    this.initCharts(data)
   },
   methods: {
     initCharts (data) {
@@ -29,9 +81,31 @@ export default {
       this.options(data)
     },
     options (data) {
+      let bj = []
+      let tj = []
+      data.forEach(item => {
+        item.value.forEach(value => {
+          if (item.name === '补缴') {
+            bj.push(value.value)
+          } else if (item.name === '退缴') {
+            tj.push(value.value)
+          }
+        })
+      })
+      let max = [...bj].sort((a, b) => {
+        return b - a
+      })[0]
+      let min = [...tj].sort((a, b) => {
+        return b - a
+      })[0]
       let option = {
-        title: {
-          text: ''
+        tooltip: {
+          trigger: 'item',
+          backgroundColor: 'rgba(0,0,0,.5)',
+          borderColor: 'rgba(0,0,0,.5)',
+          textStyle: {
+            color: '#fefefe'
+          }
         },
         legend: [
           {
@@ -42,6 +116,116 @@ export default {
               fontSize: '14px',
               color: '#9ba6b1'
             },
+            icon: 'circle',
+            itemWidth: 8, // 标志图形的长度
+            itemHeight: 8// 标志图形的宽度
+          },
+          {
+            // top: '35%',
+            bottom: '6%',
+            left: '10%',
+            orient: 'horizontal',
+            data: ['补缴'],
+            formatter: function (name) {
+              var oa = option.series[0].data[0].value
+              var num = 0
+              oa.forEach((item, index) => {
+                num += item
+              })
+              for (var i = 0; i < oa.length; i++) {
+                if (oa[i] === max) {
+                  return '\n' + '\n' + '{a|补缴最多险种}' + '\n' + '{d|' + data[0].value[i].name + '}' + '\n' + '{b|' + oa[i] + '}' + '万元' + ' ' + '{c|' + ((Number(oa[i]) / Number(num) * 100).toFixed(2) + '%') + '}'
+                }
+              }
+            },
+            textStyle: {
+              rich: {
+                a: {
+                  fontSize: '12px',
+                  // lineHeight: 20,
+                  color: '#949fa9'
+                },
+                b: {
+                  color: '#6adafd',
+                  fontSize: '16px'
+                },
+                c: {
+                  color: '#6adafd',
+                  fontSize: '16px'
+                },
+                d: {
+                  fontSize: '16px',
+                  color: '#ffffff'
+                },
+                e: {
+                  color: '#ec903d',
+                  fontSize: '16px'
+                },
+                f: {
+                  color: '#ec903d',
+                  fontSize: '16px'
+                }
+              },
+              color: '#949fa9',
+              fontSize: 12,
+              lineHeight: 25
+            },
+            itemGap: 60,
+            icon: 'circle',
+            itemWidth: 8, // 标志图形的长度
+            itemHeight: 8// 标志图形的宽度
+          },
+          {
+            // top: '35%',
+            bottom: '6%',
+            left: '50%',
+            orient: 'horizontal',
+            data: ['退缴'],
+            formatter: function (name) {
+              var oa = option.series[0].data[1].value
+              var num = 0
+              oa.forEach((item, index) => {
+                num += item
+              })
+              for (var i = 0; i < oa.length; i++) {
+                if (oa[i] === min) {
+                  return '\n' + '\n' + '{a|退缴最多险种}' + '\n' + '{d|' + data[1].value[i].name + '}' + '\n' + '{e|' + oa[i] + '}' + '万元' + ' ' + '{f|' + ((Number(oa[i]) / Number(num) * 100).toFixed(2) + '%') + '}'
+                }
+              }
+            },
+            textStyle: {
+              rich: {
+                a: {
+                  fontSize: '12px',
+                  // lineHeight: 20,
+                  color: '#949fa9'
+                },
+                b: {
+                  color: '#6adafd',
+                  fontSize: '16px'
+                },
+                c: {
+                  color: '#6adafd',
+                  fontSize: '16px'
+                },
+                d: {
+                  fontSize: '16px',
+                  color: '#ffffff'
+                },
+                e: {
+                  color: '#ec903d',
+                  fontSize: '16px'
+                },
+                f: {
+                  color: '#ec903d',
+                  fontSize: '16px'
+                }
+              },
+              color: '#949fa9',
+              fontSize: 12,
+              lineHeight: 25
+            },
+            itemGap: 60,
             icon: 'circle',
             itemWidth: 8, // 标志图形的长度
             itemHeight: 8// 标志图形的宽度
@@ -85,7 +269,7 @@ export default {
             type: 'radar',
             data: [
               {
-                value: [420, 300, 200, 350, 500],
+                value: bj,
                 name: '补缴',
                 areaStyle: {
                   color: {
@@ -111,7 +295,7 @@ export default {
                 }
               },
               {
-                value: [500, 140, 280, 260, 420],
+                value: tj,
                 name: '退缴',
                 areaStyle: {
                   color: {

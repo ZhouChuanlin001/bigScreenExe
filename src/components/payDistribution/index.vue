@@ -189,7 +189,7 @@ export default {
         legend: [
           {
             // top: '35%',
-            bottom: '10%',
+            bottom: '6%',
             left: '10%',
             orient: 'horizontal',
             data: ['城职养老'],
@@ -235,7 +235,7 @@ export default {
               },
               color: '#949fa9',
               fontSize: 12,
-              lineHeight: 20
+              lineHeight: 25
             },
             itemGap: 60,
             icon: 'circle',
@@ -244,7 +244,7 @@ export default {
           },
           {
             // top: '35%',
-            bottom: '10%',
+            bottom: '6%',
             left: '50%',
             orient: 'horizontal',
             data: ['失业保险'],
@@ -290,7 +290,7 @@ export default {
               },
               color: '#949fa9',
               fontSize: 12,
-              lineHeight: 20
+              lineHeight: 25
             },
             itemGap: 60,
             icon: 'circle',
