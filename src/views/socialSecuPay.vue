@@ -16,11 +16,17 @@
         <listBox></listBox>
       </div>
       <div class="chartModelBox">
+        <!--各险种缴费分布-->
         <payDistribution></payDistribution>
+        <!--各险种缴费明细-->
         <payDetailed></payDetailed>
+        <!--各险种补缴/退缴情况-->
         <payRetreat></payRetreat>
+        <!--缴费趋势分析-->
         <payTrend></payTrend>
+        <!--征缴趋势分析-->
         <levyTrend></levyTrend>
+        <!--补缴退缴趋势分析-->
         <retreatTrend></retreatTrend>
       </div>
     </div>
