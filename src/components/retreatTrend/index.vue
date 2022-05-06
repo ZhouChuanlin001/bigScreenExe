@@ -69,7 +69,7 @@ export default {
           itemWidth: 8,
           itemHeight: 8,
           left: 120,
-          top: 26,
+          top: 16,
           textStyle: {
             color: '#9ba6b1'
           },

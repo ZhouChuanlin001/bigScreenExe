@@ -50,12 +50,14 @@ export default {
   methods: {
     /**
      * 初始化echarts
+     * @param {Array} data 图例所需数据
      * */
     initCharts (data) {
       this.chart = this.$echarts.init(this.$refs.pieChart)
       this.options(data)
     },
     /**
+     * options配置
      * @param { Array } data
      * */
     options (data) {

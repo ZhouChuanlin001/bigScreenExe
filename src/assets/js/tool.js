@@ -4,12 +4,6 @@
  * @param {Number} num x轴数据长度
  * @param option {object} 选项
  * @param {Number} time 延时时间
- * {
- *  interval    轮播时间间隔，单位毫秒，默认为3000
- *              true表示循环所有series的tooltip，false则显示指定seriesIndex的tooltip
- *  seriesIndex 默认为0，指定某个系列（option中的series索引）循环显示tooltip，
- *              当loopSeries为true时，从seriesIndex系列开始执行。
- * }
  * @returns {{clearLoop: clearLoop}|undefined}
  */
 
@@ -78,6 +72,7 @@ export function autoHover (myChart, option, num, time) {
       count = 0
     }
   }, time)
+
   myChart.on('mouseover', function (params) {
     clearInterval(timeTicket)
     myChart.dispatchAction({

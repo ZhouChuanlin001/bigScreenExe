@@ -76,10 +76,17 @@ export default {
     this.initCharts(data)
   },
   methods: {
+    /**
+     * 初始化echarts图例
+     * @param {Array} data 图例所需的数据
+     * */
     initCharts (data) {
       this.chart = this.$echarts.init(this.$refs.radarChart)
       this.options(data)
     },
+    /**
+     * options配置
+     * */
     options (data) {
       let bj = []
       let tj = []
