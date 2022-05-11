@@ -1,7 +1,5 @@
 <template>
   <boxStyle
-    :width="width"
-    :height="height"
     :titleWidth="935"
     :titleName="'各险种缴费明细'"
     :showSelect="false"
@@ -39,7 +37,7 @@
 import ballBox from './part/ball'
 
 export default {
-  name: 'index',
+  name: 'payDetailed',
   components: {ballBox},
   props: {
     width: {
@@ -86,6 +84,10 @@ export default {
     }
   },
   mounted () {
+  },
+  beforeDestroy () {
+    this.$echarts.dispose(this.chart)
+    this.chart = null
   },
   methods: {
     /**

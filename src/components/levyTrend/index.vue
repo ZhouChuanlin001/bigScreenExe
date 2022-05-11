@@ -1,9 +1,8 @@
 <template>
-  <boxStyle titleName="征缴趋势分析" :width="width" :height="height" :titleWidth="'574px'" :showSelect="false">
+  <boxStyle titleName="征缴趋势分析" :width="width" :height="height" :titleWidth="574" :showSelect="false">
     <div
       ref="lineChart"
       class="barBg"
-      :style="{width:(width-18)+'px',height:(height-60)+'px'}"
     ></div>
   </boxStyle>
 </template>
@@ -14,12 +13,12 @@ export default {
   name: 'index',
   props: {
     width: {
-      type: Number,
-      default: 600
+      type: String,
+      default: '100%'
     },
     height: {
-      type: Number,
-      default: 320
+      type: String,
+      default: '100%'
     },
     xAxis: {
       type: Object,
@@ -67,6 +66,10 @@ export default {
   },
   mounted () {
     this.initChart()
+  },
+  beforeDestroy () {
+    this.$echarts.dispose(this.chart)
+    this.chart = null
   },
   methods: {
     /**
@@ -304,6 +307,8 @@ export default {
 
 <style scoped>
   .barBg{
+    width: 100%;
+    height: 100%;
     background: url('../../assets/imgs/bg_line.png') no-repeat;
     background-position: 45px 165px;
     background-size: 85%;

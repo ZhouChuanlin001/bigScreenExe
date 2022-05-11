@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: '',
+  name: 'screenAdap',
   // 参数注入
   props: {
     width: {

@@ -1,24 +1,17 @@
 <template>
-  <boxStyle :width="width" :height="height" :showTab="false">
+  <boxStyle :showTab="false">
     <div
       ref="pieChart"
-      :style="{width:(width-18)+'px',height:(height-60)+'px'}"
+      style="width: 100%;height: 100%"
     ></div>
   </boxStyle>
 </template>
 
 <script>
 export default {
-  name: 'index',
+  name: 'payDistribution',
   props: {
-    width: {
-      type: Number,
-      default: 420
-    },
-    height: {
-      type: Number,
-      default: 489
-    }
+
   },
   mounted () {
     let data = [
@@ -46,6 +39,8 @@ export default {
     this.initCharts(data)
   },
   beforeDestroy () {
+    this.$echarts.dispose(this.chart)
+    this.chart = null
   },
   methods: {
     /**

@@ -3,13 +3,13 @@
     <div class="content">
       <div class="content-title">
         <div class="content-title-dateSelect">
-
+          {{nowDate | dateFormat}}
         </div>
         <div class="content-title-mid">
             <h3>社保缴费分析</h3>
         </div>
         <div class="content-title-nowDate">
-          {{nowData}}
+          {{nowDate | dateFormat('YYYY-MM-DD hh:mm:ss')}}
         </div>
       </div>
       <div class="content-list box">
@@ -17,17 +17,29 @@
       </div>
       <div class="chartModelBox">
         <!--各险种缴费分布-->
-        <payDistribution></payDistribution>
+        <div class="chartModelBox-payDis">
+          <payDistribution></payDistribution>
+        </div>
         <!--各险种缴费明细-->
-        <payDetailed></payDetailed>
+        <div class="chartModelBox-payDetail">
+          <payDetailed></payDetailed>
+        </div>
         <!--各险种补缴/退缴情况-->
-        <payRetreat></payRetreat>
+        <div class="chartModelBox-payRetreat">
+          <payRetreat></payRetreat>
+        </div>
         <!--缴费趋势分析-->
-        <payTrend></payTrend>
+        <div class="chartModelBox-payTrend">
+          <payTrend></payTrend>
+        </div>
         <!--征缴趋势分析-->
-        <levyTrend></levyTrend>
+        <div class="chartModelBox-lev">
+          <levyTrend></levyTrend>
+        </div>
         <!--补缴退缴趋势分析-->
-        <retreatTrend></retreatTrend>
+        <div class="chartModelBox-retreat">
+          <retreatTrend></retreatTrend>
+        </div>
       </div>
     </div>
   </screenAdap>
@@ -48,26 +60,40 @@ export default {
   components: {screenAdap, listBox, payDistribution, payDetailed, payRetreat, payTrend, levyTrend, retreatTrend},
   data () {
     return {
-      nowData: '',
-      titleList: []
+      nowDate: new Date(),
+      date: '',
+      timer: ''
     }
   },
   mounted () {
-    setInterval(this.getDate, 1000)
+    this.timer = setInterval(this.getDate, 1000)
+  },
+  beforeDestroy () {
+    clearInterval(this.timer)
+    this.timer = ''
   },
   methods: {
     /**
      * @description 获取当前时间的方法
      */
     getDate () {
-      this.nowData = this.dateTimeToString(new Date())
+      this.nowDate = new Date()
     }
 
   },
-  watch: {
-    nowData: {
-      handler: function (now, old) {
-        // console.log(now)
+  filters: {
+    dateFormat: function (date, format = 'YYYY/MM/DD') {
+      let y = date.getFullYear()
+      let M = date.getMonth() + 1
+      let d = date.getDate()
+      let H = date.getHours()
+      let m = date.getMinutes()
+      let s = date.getSeconds()
+
+      if (format === 'YYYY/MM/DD') {
+        return y + '/' + (M < 10 ? ('0' + M) : M) + '/' + (d < 10 ? ('0' + d) : d)
+      } else if (format === 'YYYY-MM-DD hh:mm:ss') {
+        return y + '-' + (M < 10 ? ('0' + M) : M) + '-' + (d < 10 ? ('0' + d) : d) + ' ' + (H < 10 ? ('0' + H) : H) + ':' + (m < 10 ? ('0' + m) : m) + ':' + (s < 10 ? ('0' + s) : s)
       }
     }
   }
@@ -82,31 +108,35 @@ export default {
     background-image: url("../assets/imgs/title-bottom.png");
     background-repeat: no-repeat;
     background-size: cover;
-    .content-title{
+    &-title{
       height: 52px;
       display: flex;
       justify-content: space-between;
       flex-direction: row;
-      .content-title-dateSelect{
+      &-dateSelect{
         margin-top: 15px;
         margin-left: 40px;
         width: 140px;
         height: 28px;
+        font-size: 16px;
+        line-height: 28px;
+        padding-left: 5px;
+        box-sizing: border-box;
         background-color: #061524;
         border: solid 1px #134086;
       }
-      .content-title-mid>h3{
+      &-mid>h3{
         width: 156px;
         height: 23px;
         font-family: SourceHanSansSC-Bold;
         font-size: 24px;
         font-weight: normal;
         font-stretch: normal;
-        line-height: 40px;
+        line-height: 6px;
         letter-spacing: 2px;
         color: #fefefe;
       }
-      .content-title-nowDate{
+      &-nowDate{
         margin-right: 40px;
         width: 158px;
         height: 52px;
@@ -131,5 +161,32 @@ export default {
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
+    &-payDis{
+      width:420px;
+      height: 489px
+    }
+    &-payDetail{
+      width:960px;
+      height: 490px
+    }
+    &-payRetreat{
+      width:420px;
+      height: 489px
+    }
+    &-payTrend{
+      width:600px;
+      height: 320px;
+      margin-top: 20px
+    }
+    &-lev{
+      width:600px;
+      height: 320px;
+      margin-top: 20px
+    }
+    &-retreat{
+      width:600px;
+      height: 320px;
+      margin-top: 20px
+    }
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="box" :style="{width:width+'px',height:height+'px',marginTop:marginTop+'px'}">
-    <div class="box-tile" :style="{width:titleWidth+'px'}">
+  <div class="box" :style="{marginTop:marginTop+'px'}">
+    <div class="box-tile" style="width:calc(100% - 5px)">
       <div class="box-title-icon">
         <img
           src="@/assets/imgs/triangle.png"
@@ -21,7 +21,11 @@
         </div>
       </div>
     </div>
-    <slot></slot>
+    <div  style="width: calc(100% - 18px);height: calc(100% - 40px)">
+      <slot>
+
+      </slot>
+    </div>
   </div>
 </template>
 
@@ -29,14 +33,6 @@
 export default {
   name: 'index',
   props: {
-    width: {
-      type: Number,
-      default: 600
-    },
-    height: {
-      type: Number,
-      default: 320
-    },
     marginTop: {
       type: Number,
       default: 20
@@ -99,6 +95,8 @@ export default {
 
 <style scoped lang="less">
   .box{
+    width: 100%;
+    height: 100%;
     padding: 9px;
     box-sizing: border-box;
   }

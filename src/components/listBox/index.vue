@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <div class="list-item" v-for="item in listData" :key="item.title">
+    <div class="list-item" v-for="item in titleList" :key="item.title">
       <img :src="item.url" alt="">
       <div class="list-desc">
         <div class="list-item-tltle">
@@ -25,112 +25,55 @@ export default {
       default: () => [
         {
           url: require('../../assets/imgs/01_70.png'),
-          title: '个人缴费金额',
           company: '万元',
+          title: '个人缴费金额',
           num: '282',
           percentage: '+23%'
         },
         {
           url: require('../../assets/imgs/01_38.png'),
-          title: '单位缴费金额',
           company: '万元',
-          num: '',
-          percentage: ''
-        },
-        {
-          url: require('../../assets/imgs/01_7.png'),
-          title: '征缴总金额',
-          company: '万元',
-          num: '',
-          percentage: ''
-        },
-        {
-          url: require('../../assets/imgs/01_75.png'),
-          title: '缴费总人数',
-          company: '万人',
-          num: '',
-          percentage: ''
-        },
-        {
-          url: require('../../assets/imgs/01_44.png'),
-          title: '征缴率',
-          company: '',
-          num: '',
-          percentage: ''
-        },
-        {
-          url: require('../../assets/imgs/01_62.png'),
-          title: '补缴金额',
-          company: '万元',
-          num: '',
-          percentage: ''
-        },
-        {
-          url: require('../../assets/imgs/01.png'),
-          title: '退费金额',
-          company: '万元',
-          num: '',
-          percentage: ''
-        }
-      ]
-    },
-    data: {
-      type: Array,
-      default: () => [
-        {
-          title: '个人缴费金额',
-          num: '282',
-          percentage: '+23%'
-        },
-        {
           title: '单位缴费金额',
           num: '86.56',
           percentage: '-0.2%'
         },
         {
+          url: require('../../assets/imgs/01_7.png'),
+          company: '万元',
           title: '征缴总金额',
           num: '234.5',
           percentage: '+2.5%'
         },
         {
+          url: require('../../assets/imgs/01_75.png'),
+          company: '万人',
           title: '缴费总人数',
           num: '34.56',
           percentage: '+2.5%'
         },
         {
+          url: require('../../assets/imgs/01_44.png'),
+          company: '',
           title: '征缴率',
           num: '96%',
           percentage: '+2.5%'
         },
         {
+          url: require('../../assets/imgs/01_62.png'),
+          company: '万元',
           title: '补缴金额',
           num: '243.6',
           percentage: '+2.5%'
         },
         {
+          url: require('../../assets/imgs/01.png'),
+          company: '万元',
           title: '退费金额',
           num: '34.56',
           percentage: '+2.5%'
         }
       ]
     }
-  },
-  data () {
-    return {
-      listData: []
-    }
-  },
-  methods: {
-
-  },
-  mounted () {
-    this.data.forEach(item => {
-      this.titleList.forEach(val => {
-        if (val.title === item.title) {
-          this.listData.push({...val, ...item})
-        }
-      })
-    })
   }
 }
 </script>

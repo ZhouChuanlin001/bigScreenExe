@@ -1,25 +1,16 @@
 <template>
-  <boxStyle :width="width" :height="height" titleName="补缴/退缴趋势分析" :selectOptionData="selectOptionData" titleWidth="574px">
+  <boxStyle titleName="补缴/退缴趋势分析" :selectOptionData="selectOptionData" :titleWidth="574">
     <div
       ref="barChart"
       class="BarBg"
-      :style="{width:(width-18)+'px',height:(height-60)+'px'}"
     ></div>
   </boxStyle>
 </template>
 
 <script>
 export default {
-  name: 'index',
+  name: 'retreatTrend',
   props: {
-    width: {
-      type: Number,
-      default: 600
-    },
-    height: {
-      type: Number,
-      default: 320
-    },
     LineData: {
       type: Array,
       default: () => []
@@ -36,6 +27,10 @@ export default {
   },
   mounted () {
     this.initChart()
+  },
+  beforeDestroy () {
+    this.$echarts.dispose(this.chart)
+    this.chart = null
   },
   methods: {
     /**
@@ -418,6 +413,8 @@ export default {
 
 <style scoped>
   .BarBg{
+    width: 100%;
+    height: 100%;
     background: url('../../assets/imgs/bg_line.png') no-repeat;
     background-position: 45px 165px;
     background-size: 88%;
